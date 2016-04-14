@@ -1,6 +1,3 @@
-<?php
-    echo("HELLO");
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +5,7 @@
 
     <title>Login/Sign-In</title>
     <link href="css/normalize.css" rel="stylesheet">
-    <link href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet prefetch'>
+    <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet prefetch'>
     <link href="css/style.css" rel="stylesheet">
 </head>
 
@@ -115,7 +112,7 @@
             </div>
         </div>
     </div>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
     <script src="js/index.js"></script>
 </body>
 </html>

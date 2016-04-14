@@ -54,7 +54,7 @@
 
                                 <div class="simform__actions">
                                 	<!-- <button class="sumbit" type="button">Login</button> -->
-                                    <input type="submit" class="sumbit" name="instructor" value="Login">
+                                    <input type="submit" class="sumbit" value="Login">
                                     <span class="simform__actions-sidetext">
                                     	<a class="special" href="#" role="link">Forgot your password?<br>
 	                                    Click here</a>
@@ -97,7 +97,7 @@
 
                                 <div class="simform__actions">
                                 	<!-- <button class="sumbit" type="button">Login</button> -->
-                                    <input type="submit" class="sumbit" name="student" value="Login">
+                                    <input type="submit" class="sumbit" value="Login">
                                     <span class="simform__actions-sidetext">
                                     	<a class="special" href="#" role="link">Forgot your password?<br>
 	                                    Click here</a>

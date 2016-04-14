@@ -29,7 +29,7 @@
                             in</strong></span>
                         </div>
                         <div class="logmod__form">
-                            <form accept-charset="utf-8" action="#" class="simform" method="POST">
+                            <form accept-charset="utf-8" action="dashboard.php" class="simform" method="POST">
                                 <div class="sminputs">
                                     <div class="input full">
                                         <label class="string optional" for=

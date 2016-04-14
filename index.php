@@ -1,3 +1,6 @@
+<?php
+    echo("HELLO");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,9 +8,7 @@
 
     <title>Login/Sign-In</title>
     <link href="css/normalize.css" rel="stylesheet">
-    <link href=
-    'http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
-    rel='stylesheet prefetch'>
+    <link href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet prefetch'>
     <link href="css/style.css" rel="stylesheet">
 </head>
 

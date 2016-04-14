@@ -29,8 +29,7 @@
                             in</strong></span>
                         </div>
                         <div class="logmod__form">
-                            <form accept-charset="utf-8" action="#" class=
-                            "simform">
+                            <form accept-charset="utf-8" action="#" class="simform" method="POST">
                                 <div class="sminputs">
                                     <div class="input full">
                                         <label class="string optional" for=
@@ -73,8 +72,7 @@
                             in</strong></span>
                         </div>
                         <div class="logmod__form">
-                            <form accept-charset="utf-8" action="#" class=
-                            "simform">
+                            <form accept-charset="utf-8" action="#" class="simform" method="POST">
                                 <div class="sminputs">
                                     <div class="input full">
                                         <label class="string optional" for=

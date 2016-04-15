@@ -1,8 +1,12 @@
+<?php
+    session_start();
+    $_SESSION["formid"] = md5(rand(1,7919)*rand(1,7919));
+    //1000th prime no - 7919
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-
     <title>Login/Sign-In</title>
     <link href="css/normalize.css" rel="stylesheet">
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet prefetch'>
@@ -29,12 +33,13 @@
                             in</strong></span>
                         </div>
                         <div class="logmod__form">
-                            <form accept-charset="utf-8" action="dashboard.php" class="simform" method="POST">
+                            <form accept-charset="utf-8" action="logincheck.php" class="simform" method="POST">
+                            <input type="hidden" name="formid" value="<?php echo $_SESSION['formid']; ?>"/>
                                 <div class="sminputs">
                                     <div class="input full">
                                         <label class="string optional" for=
                                         "user-name">Email</label>
-                                        <input class="string optional" id=
+                                        <input class="string optional" name="email" id=
                                         "user-email" maxlength="255"
                                         placeholder="Email" size="50" type=
                                         "email">
@@ -44,7 +49,7 @@
                                     <div class="input full">
                                         <label class="string optional" for=
                                         "user-pw">Password </label>
-                                        <input class="string optional" id=
+                                        <input class="string optional" name="password" id=
                                         "user-pw" maxlength="255" placeholder=
                                         "Password" size="50" type="password">
                                         <span class="hide-password">Show</span>
@@ -53,11 +58,11 @@
 
 
                                 <div class="simform__actions">
-                                	<!-- <button class="sumbit" type="button">Login</button> -->
-                                    <input type="submit" class="sumbit" value="Login">
+                                    <!-- <button class="sumbit" type="button">Login</button> -->
+                                    <input type="submit" class="sumbit" name="instructor" value="Login">
                                     <span class="simform__actions-sidetext">
-                                    	<a class="special" href="#" role="link">Forgot your password?<br>
-	                                    Click here</a>
+                                        <a class="special" href="#" role="link">Forgot your password?<br>
+                                        Click here</a>
                                     </span>
                                 </div>
                             </form>
@@ -72,12 +77,13 @@
                             in</strong></span>
                         </div>
                         <div class="logmod__form">
-                            <form accept-charset="utf-8" action="#" class="simform" method="POST">
+                            <form accept-charset="utf-8" action="logincheck.php" class="simform" method="POST">
+                            <input type="hidden" name="formid" value="<?php echo $_SESSION['formid']; ?>"/>
                                 <div class="sminputs">
                                     <div class="input full">
                                         <label class="string optional" for=
                                         "user-name">Email</label>
-                                        <input class="string optional" id=
+                                        <input class="string optional" name="email" id=
                                         "user-email" maxlength="255"
                                         placeholder="Email" size="50" type=
                                         "email">
@@ -87,7 +93,7 @@
                                     <div class="input full">
                                         <label class="string optional" for=
                                         "user-pw">Password </label>
-                                        <input class="string optional" id=
+                                        <input class="string optional" name="password" id=
                                         "user-pw" maxlength="255" placeholder=
                                         "Password" size="50" type="password">
                                         <span class="hide-password">Show</span>
@@ -97,7 +103,7 @@
 
                                 <div class="simform__actions">
                                 	<!-- <button class="sumbit" type="button">Login</button> -->
-                                    <input type="submit" class="sumbit" value="Login">
+                                    <input type="submit" class="sumbit" name="student" value="Login">
                                     <span class="simform__actions-sidetext">
                                     	<a class="special" href="#" role="link">Forgot your password?<br>
 	                                    Click here</a>

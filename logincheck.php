@@ -14,7 +14,7 @@
     	{ 
     		unset($_SESSION["formid"]);
     		//request came from login page
-    		$stmt=$conn->prepare("SELECT password,type FROM user Where email LIKE :em ;");
+    		$stmt=$conn->prepare("SELECT password,type,user_id FROM user Where email LIKE :em ;");
 		    //bind
 			$stmt->bindParam(':em',$_POST["email"]);
 			//set and execute			
@@ -30,6 +30,7 @@
 					//			=1 for instructor
 					//			=2 for student
 					$_SESSION["logged_in"] = $result[0]["type"];
+					$_SESSION["user_id"] = $result[0]["user_id"];
 					redirect();
 				}
 				else

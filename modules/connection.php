@@ -9,6 +9,6 @@
 	catch (Exception $e)
 	{
 		//send $e message
-		header('Location: index.php?error=dbconn');
+		header('Location: '.$DOCROOT.'/index.php?error=dbconn');
 	}
 ?>

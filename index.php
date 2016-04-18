@@ -1,5 +1,8 @@
 <?php
     session_start();
+    require("modules/functions.php");
+    if(isset($_SESSION["logged_in"]))
+        redirect();
     $_SESSION["formid"] = md5(rand(1,7919)*rand(1,7919));
     //1000th prime no - 7919
 ?>
@@ -7,13 +10,21 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Login/Sign-In</title>
+    <title>Login| Assignment Submission System</title>
     <link href="css/normalize.css" rel="stylesheet">
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet prefetch'>
     <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
+    <div id="error-box">
+        <?php
+            if(isset($_GET["error"]))
+            {
+                echo $_GET["error"];
+            }
+        ?>
+    </div>
     <div class="logmod">
         <div class="logmod__wrapper">
             <div class="logmod__container">

@@ -9,7 +9,6 @@
     }
     else if(isset($_SESSION["formid"]))
     {
-
     	if($_POST["formid"]==$_SESSION["formid"])
     	{ 
     		unset($_SESSION["formid"]);
@@ -36,14 +35,14 @@
 				else
 				{
 					//wrong password
-					header('Location: index.php');
+					header('Location: index.php?error='.urlencode("Incorrect Password"));
 				}
 		    }
 		    else
 		    {
 		    	//redirect to login
 		    	//wrong email
-		    	header('Location: index.php');
+		    	header('Location: index.php?error='.urlencode("Incorrect Email"));
 		    }
     	}
     	else
@@ -51,12 +50,12 @@
     		//some unusual activity
     		unset($_SESSION["formid"]);
     		//redirect to login page
-    		header('Location: index.php');
+    		header('Location: index.php?error='.urlencode("Please login first"));
     	}
     }
     else
     {
     	//means someone tried to open logincheck.php directly and he is not logged in
-    	header('Location: index.php');
+    	header('Location: index.php?error='.urlencode("Please login first"));
     }
 ?>

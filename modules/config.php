@@ -6,6 +6,6 @@
 
 	$DOCROOT = "http://127.0.0.1/dbms";
 
-	$MAILER_FROM = "samsam10012016@gmail.com";
-	$MAILER_FROM_PASSWORD = "didi1234";
+	$MAILER_FROM = "auraxrock@gmail.com";
+	$MAILER_FROM_PASSWORD = "DCE4life";
 ?>

@@ -1,4 +1,4 @@
-<?php
+ <?php
 	// require("modules/config.php");
 	// $conn = new PDO("mysql:host=$SERVER;dbname=$DBNAME", $USER, $PASSWORD);
  //        // set the PDO error mode to exception

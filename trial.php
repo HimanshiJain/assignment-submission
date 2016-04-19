@@ -11,10 +11,4 @@
 	// { 
 	// 	echo "got some result";
  //    }
-	require("modules/mailer.php");
-	$mail->Subject = "Password for Assignment Submission Systems";
-	$mail->Body    = "Hi!";
-	$mail->AltBody = "Your Password : ";
-	$mail->AddAddress("ferozrockstar@gmail.com");
-	$flag = $mail->Send();
 ?>

@@ -153,7 +153,7 @@ class Admin
 		{		
 			$availability = 1;
 			//by email				
-				$stmt=$conn->prepare("SELECT count(*) FROM courses WHERE course_code LIKE :cc ");
+				$stmt=$conn->prepare("SELECT count(*) FROM courses WHERE course_code = :cc");
 				$stmt->bindParam(':cc',$course_code);
 				//set and execute			
 				$stmt->execute();			
@@ -184,25 +184,30 @@ class Admin
 	public function deletecourse($course_code)
 	{
 		global $conn;
+		$course_code = (string)$course_code;
 		//check if exists
 		try
 		{		
 			$exists = 0;
-			//by email				
-				$stmt=$conn->prepare("SELECT count(*) FROM courses WHERE course_code = :cc ;");
+			//by email
+				$stmt=$conn->prepare("SELECT count(*) FROM courses WHERE course_code = :cc");
 				$stmt->bindParam(':cc',$course_code);
 				//set and execute			
 				$stmt->execute();			
-				$result = $stmt->fetchAll();
+				$result = $stmt->fetchAll();							
 				if($result[0][0] > 0)  
+				{
 					$exists = 1;
+				}
 				else
+				{
 					return -2;			    
+				}
 			if($exists == 1)
 			{
 				$conn->beginTransaction();
 				$sqlq = "DELETE FROM courses ";
-		    	$sqlq .= " WHERE course_code == :cc;";
+		    	$sqlq .= " WHERE course_code = :cc;";
 			    $stmt = $conn->prepare($sqlq);
 			    $stmt->bindParam(':cc',$course_code);
 				$stmt->execute();

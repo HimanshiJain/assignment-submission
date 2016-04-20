@@ -44,6 +44,8 @@ class Admin
 				$password = substr($password, rand(0,50),8);
 				$sqlq = "INSERT INTO user (email,password,type)";
 		    	$sqlq .= " VALUES (?,?,?);";
+		    	//BEGIN TRANSACTION
+				$conn->beginTransaction();
 			    $stmt = $conn->prepare($sqlq);
 			    $stmt->bindParam(1,$email); $stmt->bindParam(2,$password);$stmt->bindParam(3,$type);
 			    //type = 2, for student 
@@ -59,13 +61,16 @@ class Admin
 				$stmt->execute();		
 				$mail = new Email();
 				$flag = $mail->send_password_email($email,$password);
+				if($flag==1)
+					$conn->commit();
+				else
+					$conn->rollBack();
 				return $flag;
 			}
 		}
 		catch(Exception $e)
 		{
-			echo $e;
-			return $e;
+			return -1;
 		}
 	}
 	public function addinstructor($name,$code,$email)
@@ -110,6 +115,8 @@ class Admin
 				$password = substr($password, rand(0,50),8);
 				$sqlq = "INSERT INTO user (email,password,type)";
 		    	$sqlq .= " VALUES (?,?,?);";
+		    	//BEGIN TRANSACTION
+				$conn->beginTransaction();
 			    $stmt = $conn->prepare($sqlq);
 			    $stmt->bindParam(1,$email); $stmt->bindParam(2,$password);$stmt->bindParam(3,$type);
 			    //type = 2, for student 
@@ -125,23 +132,89 @@ class Admin
 				$stmt->execute();		
 				$mail = new Email();
 				$flag = $mail->send_password_email($email,$password);
+				if($flag==1)
+					$conn->commit();
+				else
+					$conn->rollBack();
 				return $flag;
 			}
 		}
 		catch(Exception $e)
 		{
-			echo $e;
-			return $e;
+			return -1;
 		}
 	}
-	public function addcourse($token)
+	public function addcourse($course_name,$course_code)
 	{
-		
+		global $conn;
+		$course_code = (string)$course_code;
+		//check duplicacy
+		try
+		{		
+			$availability = 1;
+			//by email				
+				$stmt=$conn->prepare("SELECT count(*) FROM courses WHERE course_code LIKE :cc ");
+				$stmt->bindParam(':cc',$course_code);
+				//set and execute			
+				$stmt->execute();			
+				$result = $stmt->fetchAll();
+				if($result[0][0]>0) 
+				{ 
+					$availability = 0;
+					return -2;
+			    }
+			if($availability == 1)
+			{
+				$conn->beginTransaction();
+				$sqlq = "INSERT INTO courses (course_code,name)";
+		    	$sqlq .= " VALUES (?,?);";
+			    $stmt = $conn->prepare($sqlq);
+			    $stmt->bindParam(1,$course_code); $stmt->bindParam(2,$course_name);
+				$stmt->execute();
+				$conn->commit();
+				return 1;
+			}
+			return -1;
+		}
+		catch(Exception $e)
+		{
+			return -1;
+		}
 	}
-	public function delete($token)
+	public function deletecourse($course_code)
 	{
-		
+		global $conn;
+		//check if exists
+		try
+		{		
+			$exists = 0;
+			//by email				
+				$stmt=$conn->prepare("SELECT count(*) FROM courses WHERE course_code = :cc ;");
+				$stmt->bindParam(':cc',$course_code);
+				//set and execute			
+				$stmt->execute();			
+				$result = $stmt->fetchAll();
+				if($result[0][0] > 0)  
+					$exists = 1;
+				else
+					return -2;			    
+			if($exists == 1)
+			{
+				$conn->beginTransaction();
+				$sqlq = "DELETE FROM courses ";
+		    	$sqlq .= " WHERE course_code == :cc;";
+			    $stmt = $conn->prepare($sqlq);
+			    $stmt->bindParam(':cc',$course_code);
+				$stmt->execute();
+				$conn->commit();
+				return 1;
+			}
+			return -1;
+		}
+		catch(Exception $e)
+		{
+			return -1;
+		}
 	}	
 }
-
 ?>

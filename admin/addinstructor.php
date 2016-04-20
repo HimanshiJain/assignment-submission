@@ -7,10 +7,7 @@
 	require_once("../modules/admin_class.php");
 	security_redirect_admin();
 	$admin = new Admin();
-	echo "ADDING INSTRUCTOR";
 	$flag = $admin->addinstructor($_POST["name"],$_POST["code"],$_POST["email"]);
-	echo $flag;
-	/*
 	if($flag == 1)
 	{
 		header('Location: dashboard.php?msg='.urlencode("Instructor added Successfully"));
@@ -26,5 +23,5 @@
 	else
 	{
 		header('Location: dashboard.php?error='.urlencode("Unexpected Error, Try After sometime"));
-	}*/
+	}
 ?>

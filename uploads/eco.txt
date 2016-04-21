@@ -1,0 +1,16 @@
+1. problems in current farming techniques
+2. visit if possible and discuss problems
+3. Solution:: IoT ->Introduction
+                  ->IoT implemented in smart farms
+                      :for every stage of farming
+                  ->Initial Cost Of implementing
+                  ->Proposed help from the govt.
+                      :knowledge
+                      :subsidy
+                      :policies/incentives
+4. Comparison between the present scenario and our proposed solution
+5. Conclusion
+6. Actual implementation(Status)
+
+
+Digital india benefit to farmers

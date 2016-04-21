@@ -8,7 +8,8 @@
 			<ul class="nav nav-tabs nav-stacked main-menu">';
 	foreach ($courses_taught as $course) 
 	{
-    	$html_courses .= '<li><a href=""><span class="hidden-tablet">'.$course["course_code"]." : ".$course["name"].'</span></a></li>';
+		$href = $DOCROOT.'/T1.php?coursecode='. urlencode($course["course_code"]);
+    	$html_courses .= '<li><a href="'.$href.'"><span class="hidden-tablet">'.$course["course_code"]." : ".$course["name"].'</span></a></li>';
 	}
 	$html_courses .=
 			'</ul>

@@ -187,5 +187,23 @@ class Teacher
 			return 0;
 		}
 	}
+	public function initialise_courseid()
+	{
+		$teacher_id = $_SESSION["teacher_id"];
+		global $conn;
+		try
+		{
+			$sql = "SELECT * FROM courses_taught JOIN courses ON courses.course_id = courses_taught.course_id WHERE teacher_id = ?";
+			$stmt= $conn->prepare($sql);
+			$stmt->bindParam(1, $teacher_id);
+			$stmt->execute();
+			$result=$stmt->fetchAll();
+			$_SESSION["course_code"] = $result[0]["course_code"];
+		}
+		catch(Exception $e)
+		{
+			//do nothing
+		}
+	}
 }
 ?>

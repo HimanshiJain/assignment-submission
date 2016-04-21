@@ -1,13 +1,17 @@
 <html>
 <body>
 <?php 
-require_once("modules/connection.php");
-require_once("modules/teacher.php");
+	session_start();
+	require_once("modules/functions.php");
+	require_once("modules/connection.php");
+	require_once("modules/teacher.php");
+    security_redirect_teacher();
 $db=new Teacher();
 $result=array();
-if(isset($_GET['course_id'])&& isset($_GET['teacher_id'])){
+if(isset($_GET['course_id'])) 
+{
 	$course_id=$_GET['course_id'];
-	$teacher_id=$_GET['teacher_id'];
+	$teacher_id=$_SESSION['teacher_id'];
 	$result=$db->get_assignments_course($course_id,$teacher_id);
 	//print_r($result);
 }

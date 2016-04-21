@@ -4,10 +4,18 @@
 	require_once("modules/connection.php");
 	require_once("modules/teacher.php");
     security_redirect_teacher();
-    $course_id=1;
-	$teacher_id=1;
+    if(!isset($_SESSION["course_code"]))
+    {
+    	$db = new Teacher();
+		$db->initialise_courseid();
+    }
+    if(isset($_GET["coursecode"]))
+    {
+    	$_SESSION["course_code"] = urldecode($_GET["coursecode"]);
+    }
+    $course_id = $_SESSION["course_code"];
+	$teacher_id = $_SESSION["teacher_id"];
 ?>
-
 <?php
 	//INCLUDING HEADER
 	require("modules/teacher_header.php");
@@ -62,6 +70,12 @@
 					<div class="box-content" >
 						<form class="form-horizontal" action="upload_file.php" method="post" enctype="multipart/form-data" id="upload_form" name="upload_form">
 						  <fieldset>
+						  	<div class="form-group">
+							    <label class="col-sm-2 control-label" for="course-code">For Course</label>
+							    <div class="controls">
+							    <input class="form-control" name="coursecode" id="course" type="text" placeholder="<?php echo $_SESSION['course_code']; ?>" disabled>
+							    </div>
+							</div>
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">Assignment Name </label>
 				                <div class="controls">
@@ -98,7 +112,7 @@
 				                <input type="number" name="max_marks" class="span6 typeahead" id="typeahead">
 				                </div>
 							</div>
-							<input type="hidden" name="course_id" value="<?php echo $course_id;?>">
+							<!-- <input type="hidden" name="course_id" value="<?php echo $course_id;?>"> -->
 							  <div class="control-group">
 							  <label class="control-label" for="date01">Due Date </label>
 							  <div class="controls">
@@ -110,9 +124,7 @@
 							  <button type="reset" class="btn">Cancel</button>
 							</div>
 						  </fieldset>
-						</form>   
-
-		                
+						</form>		                
                     </div>
                     </div>
                 </div>

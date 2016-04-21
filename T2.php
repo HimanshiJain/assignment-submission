@@ -4,8 +4,13 @@
 	require_once("modules/connection.php");
 	require_once("modules/teacher.php");
     security_redirect_teacher();
-    $course_id=1;
-	$teacher_id=1;
+    if(!isset($_SESSION["course_code"]))
+    {
+    	$db = new Teacher();
+		$db->initialise_courseid();
+    }
+    $course_id = $_SESSION["course_code"];
+	$teacher_id = $_SESSION["teacher_id"];
 ?>
 
 <?php

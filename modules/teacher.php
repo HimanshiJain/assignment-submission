@@ -143,26 +143,38 @@ class Teacher
 	{
 		$teacher_id = (int)$teacher_id;
 		global $conn;
+		try
+		{
 			$sqlq = "INSERT INTO courses_taught (course_id,teacher_id)";
 		    $sqlq .= " VALUES ((SELECT course_id FROM courses WHERE course_code = ?),?);";
-			$stmt= $conn->prepare($sql);
-			$stmt->bindParam(1, $tcourse_code);
+			$stmt= $conn->prepare($sqlq);
+			$stmt->bindParam(1, $course_code);
 			$stmt->bindParam(2, $teacher_id);
 			$stmt->execute();
-			$result=$stmt->fetchAll();
-			return $result;
+			return 1;
+		}
+		catch(Exception $e)
+		{
+			return 0;
+		}	
 	}
 	public function delete_course($teacher_id,$course_code)
 	{
 		$teacher_id = (int)$teacher_id;
 		global $conn;
-			$sql = "DELETE FROM courses_taught WHERE teacher_id = ? AND course_id =(SELECT course_id FROM courses WHERE course_code = ?);";
+		try
+		{
+			$sql = "DELETE FROM courses_taught WHERE teacher_id = ? AND course_id = (SELECT course_id FROM courses WHERE course_code = ?);";
 			$stmt= $conn->prepare($sql);
 			$stmt->bindParam(1, $teacher_id);
 			$stmt->bindParam(2, $course_code);
 			$stmt->execute();
-			$result=$stmt->fetchAll();
-			return $result;
+			return 1;
+		}
+		catch(Exception $e)
+		{
+			return 0;
+		}
 	}
 }
 ?>

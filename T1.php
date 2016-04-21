@@ -71,9 +71,11 @@ $teacher_id=1;?>
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
+								
 								<li class="dropdown-menu-title">
  									<span>Account Settings</span>
 								</li>
+								<li><a href="modifycoursetaught.php"><i class="halflings-icon off"></i> Modify Courses</a></li>
 								<li><a href="logout.php"><i class="halflings-icon off"></i> Logout</a></li>
 							</ul>
 						</li>

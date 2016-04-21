@@ -1,9 +1,7 @@
 <?php
-
 class Teacher
 {
-	public function upload_assignment($assignment_name,$max_marks,$due_date,$description,$reference,$course_id,$filepath)
-	{
+	public function upload_assignment($assignment_name,$max_marks,$due_date,$description,$reference,$course_id,$filepath){
 		
 		global $conn;
 		//received information after submitting uploaded form by teacher
@@ -16,12 +14,14 @@ class Teacher
 		$stmt->bindparam(4, $reference);
 		$stmt->bindparam(5, $max_marks);
 		$stmt->bindparam(6, $course_id);
-		$stmt->bindparam(7, $filepath);		
+		$stmt->bindparam(7, $filepath);
+		
 		$stmt->execute();
-		return $conn->lastInsertId();	
-	}	
-	public function initialise_marks($assignment_id, $course_id)
-	{
+		return $conn->lastInsertId();
+		
+	}
+	
+	public function initialise_marks($assignment_id, $course_id){
 		//for each assignment created, new empty records are initialised for students 
 		//enrolled with the course for which the assignment is uploaded
 		
@@ -116,6 +116,17 @@ class Teacher
 			//echo "</br>".$complete_array[0][0][0]."</br>";
 			return $complete_array;
 	}
+	
+	public function get_no_of_assignments_view($course_id){
+		global $conn;
+			$sql = "SELECT count(assignment_id) FROM assignment where course_id=?";
+			$stmt= $conn->prepare($sql);
+			$stmt->bindParam(1, $course_id);
+			$stmt->execute();
+			$result=$stmt->fetchAll();
+			return $result;
+	}
+
 	public function get_courses_taught($teacher_id)
 	{
 		$teacher_id = (int)$teacher_id;

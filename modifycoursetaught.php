@@ -23,6 +23,24 @@
 		</tr>';
 		$i += 1;
     }
+    $courses_not_taught = $db->get_courses_not_taught($_SESSION["teacher_id"]);
+    $html_courses_not_taken = "";
+    $i = 1;
+    foreach ($courses_not_taught as $course)
+    {
+    	$html_courses_not_taken .= '	
+		<tr>
+            <td>'. (string)$i .'</td>
+            <td class="center">'.$course["course_code"].'</td>
+			<td class="center">'.$course["name"].'</td>
+            <td class="center">
+            <a href="">
+            <button type="button" class="btn btn-success">Add '.$course["course_code"].'</button>
+            </a>
+            </td>
+		</tr>';
+		$i += 1;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,12 +144,7 @@
 			</div>
 			<!-- end: Main Menu -->
 			
-			<noscript>
-				<div class="alert alert-block span10">
-					<h4 class="alert-heading">Warning!</h4>
-					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
-				</div>
-			</noscript>
+
 	
         <!-- start: Content -->
 			<div id="content" class="span10">
@@ -170,9 +183,9 @@
 	                </div>
 	            </div>
 	        <div class="row-fluid sortable">		
-				<div class="box span10">
+				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><span class="break"></span>Courses Assigned</h2>
+						<h2><span class="break"></span>Courses that are currently not taken by you</h2>
 				    </div>
 					<div class="box-content">
 						<table class="table table-striped table-bordered bootstrap-datatable datatable">
@@ -185,7 +198,7 @@
 							  </tr>
 						  </thead>   
 							<tbody>
-							<?php echo $html_courses_already;?>				
+							<?php echo $html_courses_not_taken;?>				
  		                    </tbody>
                         </table>
                     </div>

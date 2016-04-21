@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	require_once("modules/functions.php");
+	require_once("modules/connection.php");
+	require_once("modules/teacher.php");
+    security_redirect_teacher();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +74,7 @@ $teacher_id=1;?>
 								<li class="dropdown-menu-title">
  									<span>Account Settings</span>
 								</li>
-								<li><a href="login.html"><i class="halflings-icon off"></i> Logout</a></li>
+								<li><a href="logout.php"><i class="halflings-icon off"></i> Logout</a></li>
 							</ul>
 						</li>
 						<!-- end: User Dropdown -->
@@ -85,17 +92,9 @@ $teacher_id=1;?>
 		<div class="row-fluid">
 				
 			<!-- start: Main Menu -->
-			<div id="sidebar-left" class="span2">
-				<div class="nav-collapse sidebar-nav">
-					<ul class="nav nav-tabs nav-stacked main-menu">
-						<li><a href="#"><span class="hidden-tablet"> <b>COURSES</b></span></a></li>	
-						<li><a href="#"><span class="hidden-tablet"> ABC</span></a></li>
-						<li><a href="#"><span class="hidden-tablet"> DEF</span></a></li>
-						<li><a href="#"><span class="hidden-tablet"> GHI</span></a></li>
-						<li><a href="#"><span class="hidden-tablet"> JKL</span></a></li>
-					</ul>
-				</div>
-			</div>
+			<?php
+				require("modules/fetchcourses.php");
+			?>
 			<!-- end: Main Menu -->
 			
 			<noscript>

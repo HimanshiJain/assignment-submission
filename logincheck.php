@@ -30,6 +30,48 @@
 					//			=2 for student
 					$_SESSION["logged_in"] = $result[0]["type"];
 					$_SESSION["user_id"] = $result[0]["user_id"];
+					switch($_SESSION["logged_in"])
+					{
+						case 0 :$stmt=$conn->prepare("SELECT admin_id FROM admin Where user_id = :uid ;");
+								$stmt->bindParam(':uid',$_SESSION["user_id"]);	
+								$stmt->execute();		
+								$result = $stmt->fetchAll();
+								if(count($result) > 0)
+								{
+									$_SESSION["admin_id"] = $result[0][0];
+								}
+								else
+								{
+									header('Location: index.php?error='.urlencode("User id exists but special id does not"));
+								}	
+								break;
+						case 1 :$stmt=$conn->prepare("SELECT teacher_id FROM teacher Where user_id = :uid ;");
+								$stmt->bindParam(':uid',$_SESSION["user_id"]);	
+								$stmt->execute();		
+								$result = $stmt->fetchAll();
+								if(count($result) > 0)
+								{
+									$_SESSION["teacher_id"] = $result[0][0];
+								}
+								else
+								{
+									header('Location: index.php?error='.urlencode("User id exists but special id does not"));
+								}
+								break;
+						case 2 :$stmt=$conn->prepare("SELECT student_id FROM student Where user_id = :uid ;");
+								$stmt->bindParam(':uid',$_SESSION["user_id"]);	
+								$stmt->execute();		
+								$result = $stmt->fetchAll();
+								if(count($result) > 0)
+								{
+									$_SESSION["student_id"] = $result[0][0];
+								}
+								else
+								{
+									header('Location: index.php?error='.urlencode("User id exists but special id does not"));
+								}
+								break; 
+					}
 					redirect();
 				}
 				else

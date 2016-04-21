@@ -10,7 +10,8 @@ function redirect()
 		}
 		elseif($_SESSION["logged_in"] == 1)
 		{
-			header('Location: '.$DOCROOT.'/instructor/dashboard.php');
+			//header('Location: '.$DOCROOT.'/instructor/dashboard.php');
+			header('Location: '.$DOCROOT.'/T1.php');
 		}
 		elseif($_SESSION["logged_in"] == 2)
 		{
@@ -50,7 +51,7 @@ function security_redirect_student()
 		redirect();
 	}
 }
-function security_redirect_instructor()
+function security_redirect_teacher()
 {
 	if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] == 1)
 	{

@@ -2,9 +2,8 @@
 
 class Teacher
 {
-	
-	
-	public function upload_assignment($assignment_name,$max_marks,$due_date,$description,$reference,$course_id,$filepath){
+	public function upload_assignment($assignment_name,$max_marks,$due_date,$description,$reference,$course_id,$filepath)
+	{
 		
 		global $conn;
 		//received information after submitting uploaded form by teacher
@@ -17,14 +16,12 @@ class Teacher
 		$stmt->bindparam(4, $reference);
 		$stmt->bindparam(5, $max_marks);
 		$stmt->bindparam(6, $course_id);
-		$stmt->bindparam(7, $filepath);
-		
+		$stmt->bindparam(7, $filepath);		
 		$stmt->execute();
-		return $conn->lastInsertId();
-		
-	}
-	
-	public function initialise_marks($assignment_id, $course_id){
+		return $conn->lastInsertId();	
+	}	
+	public function initialise_marks($assignment_id, $course_id)
+	{
 		//for each assignment created, new empty records are initialised for students 
 		//enrolled with the course for which the assignment is uploaded
 		
@@ -119,9 +116,53 @@ class Teacher
 			//echo "</br>".$complete_array[0][0][0]."</br>";
 			return $complete_array;
 	}
-	
-	
-	
+	public function get_courses_taught($teacher_id)
+	{
+		$teacher_id = (int)$teacher_id;
+		//view all courses of the teacher
+		global $conn;
+			$sql = "SELECT * FROM courses_taught JOIN courses ON courses.course_id = courses_taught.course_id WHERE teacher_id = ?";
+			$stmt= $conn->prepare($sql);
+			$stmt->bindParam(1, $teacher_id);
+			$stmt->execute();
+			$result=$stmt->fetchAll();
+			return $result;
+	}
+	public function get_courses_not_taught($teacher_id)
+	{
+		$teacher_id = (int)$teacher_id;
+		global $conn;
+			$sql = "SELECT name,course_code FROM courses WHERE course_code NOT IN (SELECT courses.course_code as course_code FROM courses_taught JOIN courses ON courses.course_id = courses_taught.course_id WHERE teacher_id = ?)	";
+			$stmt= $conn->prepare($sql);
+			$stmt->bindParam(1, $teacher_id);
+			$stmt->execute();
+			$result=$stmt->fetchAll();
+			return $result;
+	}
+	public function add_course($teacher_id,$course_code)
+	{
+		$teacher_id = (int)$teacher_id;
+		global $conn;
+			$sqlq = "INSERT INTO courses_taught (course_id,teacher_id)";
+		    $sqlq .= " VALUES ((SELECT course_id FROM courses WHERE course_code = ?),?);";
+			$stmt= $conn->prepare($sql);
+			$stmt->bindParam(1, $tcourse_code);
+			$stmt->bindParam(2, $teacher_id);
+			$stmt->execute();
+			$result=$stmt->fetchAll();
+			return $result;
+	}
+	public function delete_course($teacher_id,$course_code)
+	{
+		$teacher_id = (int)$teacher_id;
+		global $conn;
+			$sql = "DELETE FROM courses_taught WHERE teacher_id = ? AND course_id =(SELECT course_id FROM courses WHERE course_code = ?);";
+			$stmt= $conn->prepare($sql);
+			$stmt->bindParam(1, $teacher_id);
+			$stmt->bindParam(2, $course_code);
+			$stmt->execute();
+			$result=$stmt->fetchAll();
+			return $result;
+	}
 }
-
 ?>

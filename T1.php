@@ -21,7 +21,7 @@
 	require("modules/teacher_header.php");
 ?>
 	
-        <!-- start: Content -->
+       <!-- start: Content -->
 			<div id="content" class="span10">
 			<div class="row-fluid">
 				
@@ -30,7 +30,7 @@
 	           
                 </div>
 				<div class="span3 statbox green" onTablet="span6" onDesktop="span3">
-				    <div class="new"> <a href="T2.php?course_id=<?php echo $course_id?>&teacher_id=<?php echo $teacher_id?>"> EVALUATE ASSIGNMENT </a></div>
+				    <div class="new"> <a href="T2.php"> EVALUATE ASSIGNMENT </a></div>
 	            </div>
 				<div class="span3 statbox blue noMargin" onTablet="span6" onDesktop="span3">
 				    <div class="new"> <a href="T4.php"> VIEW MARKS </a></div>

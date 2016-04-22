@@ -28,22 +28,36 @@
 								$result=$st->get_assignment_details($assignment_id);
 								foreach($result as $key){
 									?>
-                        <p class="new3"> 
-                            Assignment Name : <?php echo $key['assignment_name'];?> <br> <br>
-                            Assignment Link: <a href="<?php echo $key['filepath'];?>" target="_blank">View</a> <br> <br>
-                            Description : <?php echo $key['description'];?> <br> <br>
-                            References : <?php echo $key['reference'];?> <br> <br>
-                            Maximum Marks : <?php echo $key['max_marks'];?> <br> <br>
-                            Due Date : <?php echo $key['due_date'];?> <br> <br>
-                            
-                        </p>
-								<?php };?>
-						<form class="form-horizontal">
+                       <ul class="messagesList">
+						
+						<li>
+							<span class="from">Assignment Name : </span><span class="title"><?php echo $key['assignment_name'];?></span>
+						</li>
+                        <li>
+							<span class="from">Assignment : </span><span class="title"><a href="<?php echo $key['filepath'];?>" target="_blank"><u>View</u></a></span>
+						</li>
+				        <li>
+							<span class="from">Description : </span><span class="title"><?php echo $key['description'];?></span>
+						</li>
+                        <li>
+							<span class="from">References : </span><span class="title"><?php echo $key['reference'];?></span>
+						</li>
+                        <li>
+							<span class="from">Maximum Marks : </span><span class="title"><?php echo $key['max_marks'];?></span>
+						</li>
+                        <li>
+							<span class="from">Due Date : </span><span class="title"><?php echo $key['due_date'];?></span>
+						</li>
+						</ul>
+								<?php };
+								if(!$st->uploaded($student_id,$assignment_id)){
+								?>
+						<form class="form-horizontal" method="POST" enctype="multipart/form-data" action="upload_student_file.php?student_id=<?php echo $student_id?>&assignment_id=<?php echo $assignment_id?>">
                             <fieldset>
 							<div class="control-group">
 							  <label class="control-label" for="fileInput">File Path </label>
 							  <div class="controls">
-								<input class="input-file uniform_on" id="fileInput" type="file">
+								<input class="input-file uniform_on" id="fileInput" type="file" name="aFile">
 							  </div>
 							</div>
                     		<div class="form-actions">
@@ -52,6 +66,26 @@
 							</div>
 						  </fieldset>
 						</form>
+						<?php
+								}else {
+									$result=$st->get_uploaded_file($student_id,$assignment_id);
+									if(isset($_GET['uploaded']) && $_GET['uploaded']=="successful"){
+									
+									?>
+								<div class="alert alert-success">
+									<strong>Successfully uploaded!</strong> 
+								</div>
+								<span class="from">Uploaded Solution : </span><span class="title"><a href="<?php echo $result[0][0];?>" target="_blank"><u>View</u></a></span>
+								
+								<?php
+								}else{?>
+								<div class="alert alert-success">
+									<strong>Already Submitted!</strong> 
+								</div>
+								<span class="from">Uploaded Solution : </span><span class="title"><a href="<?php echo $result[0][0];?>" target="_blank"><u>View</u></a></span>
+									<?php
+								}
+								}?>
 					</div>
 				</div>
 			</div>

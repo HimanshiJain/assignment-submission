@@ -9,7 +9,7 @@
     	$db = new Teacher();
 		$db->initialise_courseid();
     }
-    $course_id = $_SESSION["course_code"];
+    $course_code = $_SESSION["course_code"];
 	$teacher_id = $_SESSION["teacher_id"];
 ?>
 
@@ -29,7 +29,7 @@
 				    <div class="new"> <a href="T2.php"> EVALUATE ASSIGNMENT </a></div>
 	            </div>
 				<div class="span3 statbox blue noMargin" onTablet="span6" onDesktop="span3">
-				    <div class="new"> <a href="T4.html"> VIEW MARKS </a></div>
+				    <div class="new"> <a href="T4.php"> VIEW MARKS </a></div>
 	            </div>
 			</div>		
                 
@@ -49,22 +49,16 @@
 						  </thead>   
 						  <tbody>
 						  <?php 
-							require_once("modules/connection.php");
-							require_once("modules/teacher.php");
-							$db=new Teacher();
+							
 							$result=array();
-							if(isset($_GET['course_id'])&& isset($_GET['teacher_id'])){
-								$course_id=$_GET['course_id'];
-								$teacher_id=$_GET['teacher_id'];
-								$result=$db->get_assignments_course($course_id,$teacher_id);
-								//print_r($result);
-							}
-							echo "</br></br></br></br></br>";
+							
+							$result=$db->get_assignments_course($course_code,$teacher_id);
+							
 							foreach($result as $key => $assignment){
 								//echo $assignment['assignment_id'];
 								?>
 							<tr>
-                                <td> <a href="evaluate_assignment.php?assignment_id=<?php echo $assignment['assignment_id']?>" >
+                                <td> <a href="T3.php?assignment_id=<?php echo $assignment['assignment_id']?>" >
 			<?php echo $assignment['assignment_name']?></a></td>
                                 <td class="center"><a href="<?php echo $assignment['filepath']?>" target="_blank">View File</a></td>
 								<td class="center"><?php echo $assignment['due_date'];?></td>

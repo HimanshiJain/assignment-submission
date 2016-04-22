@@ -15,7 +15,7 @@ function redirect()
 		}
 		elseif($_SESSION["logged_in"] == 2)
 		{
-			header('Location: '.$DOCROOT.'/student/dashboard.php');
+			header('Location: '.$DOCROOT.'/s1.php');
 		}
 		else
 		{

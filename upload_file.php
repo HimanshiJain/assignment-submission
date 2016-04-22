@@ -33,7 +33,7 @@ if($uploadOk==1){
 		echo "error uploading file";
 	}
 }
-print_r($_FILES);
+//print_r($_FILES);
 
 $lastInsertId=$db->upload_assignment($assignment_name,$max_marks,$due_date,$description,$reference,$course_id,$target_file);
 echo $lastInsertId;

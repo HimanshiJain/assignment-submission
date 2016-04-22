@@ -2,7 +2,7 @@
 
 class Admin
 {
-	public function addstudent($name,$roll_no,$email)
+	public function addstudent($name,$roll_no,$email,$courses_applied)
 	{
 		global $conn;
 		$roll_no = (string)$roll_no;
@@ -45,20 +45,31 @@ class Admin
 				$sqlq = "INSERT INTO user (email,password,type)";
 		    	$sqlq .= " VALUES (?,?,?);";
 		    	//BEGIN TRANSACTION
+
+		    	//CREATE USER
 				$conn->beginTransaction();
 			    $stmt = $conn->prepare($sqlq);
 			    $stmt->bindParam(1,$email); $stmt->bindParam(2,$password);$stmt->bindParam(3,$type);
 			    //type = 2, for student 
-				//set and execute
 				$stmt->execute();
 
-				//create student
+				//CREATE STUDENT
 				$sqlq = "INSERT INTO student (name,roll_no,user_id)";
 		    	$sqlq .= " VALUES (?,?,(SELECT user_id FROM user WHERE email = ?));";
 			    $stmt = $conn->prepare($sqlq);
 			    $stmt->bindParam(1,$name); $stmt->bindParam(2,$roll_no);$stmt->bindParam(3,$email);
-				//set and execute
-				$stmt->execute();		
+				$stmt->execute();
+				$student_id = $conn->lastInsertId();
+				//ADD COURSES
+				foreach($courses_applied as $course_id)
+				{
+					$course_id =(int)$course_id;
+					$sqlq = "INSERT INTO enrolls (student_id,course_id)";
+			    	$sqlq .= " VALUES (?,?);";
+				    $stmt = $conn->prepare($sqlq);
+				    $stmt->bindParam(1,$student_id); $stmt->bindParam(2,$course_id);
+					$stmt->execute();	
+				}
 				$mail = new Email();
 				$flag = $mail->send_password_email($email,$password);
 				if($flag==1)
@@ -220,6 +231,21 @@ class Admin
 		{
 			return -1;
 		}
-	}	
+	}
+	public function getallcourse()
+	{
+		global $conn;
+		try
+		{		
+			$stmt=$conn->prepare("SELECT * FROM courses");		
+			$stmt->execute();			
+			$result = $stmt->fetchAll();
+			return $result;
+		}
+		catch(Exception $e)
+		{
+			return -1;
+		}
+	}
 }
 ?>

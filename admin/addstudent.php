@@ -7,7 +7,13 @@
 	require_once("../modules/admin_class.php");
 	security_redirect_admin();
 	$admin = new Admin();
-	$flag = $admin->addstudent($_POST["name"],$_POST["roll"],$_POST["email"]);
+	if(!isset($_POST['course_applied']))
+	{
+		header('Location: dashboard.php?error='.urlencode("Select atleast one course"));
+		die();
+	}
+	
+	$flag = $admin->addstudent($_POST["name"],$_POST["roll"],$_POST["email"],$_POST['course_applied']);
 	if($flag == 1)
 	{
 		header('Location: dashboard.php?msg='.urlencode("Student Successfully Added"));

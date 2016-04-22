@@ -1,6 +1,8 @@
 <?php
 	require_once("modules/connection.php");
 	require_once("modules/teacher.php");
+	require_once("phpmailer/class.phpmailer.php");
+	require_once("modules/email_class.php");
 	$db=new Teacher();
 
 	$assignment_name=$_POST['name'];
@@ -33,7 +35,7 @@ if($uploadOk==1){
 		echo "error uploading file";
 	}
 }
-print_r($_FILES);
+//print_r($_FILES);
 
 $lastInsertId=$db->upload_assignment($assignment_name,$max_marks,$due_date,$description,$reference,$course_id,$target_file);
 echo $lastInsertId;

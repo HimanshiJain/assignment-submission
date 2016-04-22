@@ -28,7 +28,9 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="index.html"><span>WECLOME XYZ</span></a>
+				<a class="brand" href="s1.php"><span>Welcome 
+				<?php echo $st->get_student_name($student_id);?>
+				</span></a>
 								
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
@@ -44,7 +46,7 @@
 								<li class="dropdown-menu-title">
  									<span>Account Settings</span>
 								</li>
-								<li><a href="#"><i class="halflings-icon off"></i> Logout</a></li>
+								<li><a href="logout.php"><i class="halflings-icon off"></i> Logout</a></li>
 							</ul>
 						</li>
 						<!-- end: User Dropdown -->

@@ -26,5 +26,55 @@ class Student{
 		return $result;
 		
 	}
+	
+	public function upload_assignment($student_id,$assignment_id,$filepath){
+		global $conn;
+		$sql="INSERT INTO submits(student_id,assignment_id,filepath,timestamp) values(?,?,?,NOW())";
+		$stmt=$conn->prepare($sql);
+		$stmt->bindparam(1,$student_id);
+		$stmt->bindparam(2,$assignment_id);
+		$stmt->bindparam(3,$filepath);
+		$stmt->execute();
+		
+	}
+	
+	public function uploaded($student_id,$assignment_id){
+		global $conn;
+		$sql="SELECT count(id) from submits 
+				where assignment_id=? AND student_id=?";
+		$stmt=$conn->prepare($sql);
+		$stmt->bindparam(1,$assignment_id);
+		$stmt->bindparam(2,$student_id);
+		$stmt->execute();
+		$result=$stmt->fetchAll();
+		if($result[0][0]==0)
+			return false;
+		else return true;
+	}
+	
+	public function get_uploaded_file($student_id,$assignment_id){
+		global $conn;
+		$sql="SELECT filepath from submits 
+				where assignment_id=? AND student_id=?";
+		$stmt=$conn->prepare($sql);
+		$stmt->bindparam(1,$assignment_id);
+		$stmt->bindparam(2,$student_id);
+		$stmt->execute();
+		$result=$stmt->fetchAll();
+		return $result;
+	}
+	
+	public function get_student_name($student_id){
+		global $conn;
+		$sql="SELECT name from student
+				where student_id=?";
+		$stmt=$conn->prepare($sql);
+		$stmt->bindparam(1,$student_id);
+		$stmt->execute();
+		$result=$stmt->fetchAll();
+		return $result[0][0];
+		
+	}
+	
 }
 ?>

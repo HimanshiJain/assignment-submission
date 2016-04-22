@@ -44,8 +44,14 @@ class Teacher
 		
 	}
 	
-	public function get_assignments_course($course_id,$teacher_id){
+	public function get_assignments_course($course_code,$teacher_id){
 		global $conn;
+		$sql = '(SELECT course_id FROM courses WHERE course_code = ?)';
+		$stmt= $conn->prepare($sql);
+		$stmt->bindParam(1, $course_code);
+		$stmt->execute();
+		$result=$stmt->fetchAll();
+		$course_id = $result[0][0];
 		//get assignments for that specific course_id and the specific logged in teacher
 		$sql = "SELECT assignment_id,assignment_name,due_date,filepath FROM assignment,courses_taught where 
 		assignment.course_id=? AND courses_taught.teacher_id=? AND assignment.course_id=courses_taught.course_id order by due_date";
@@ -62,8 +68,8 @@ class Teacher
 	public function get_students_for_marking($assignment_id){
 			//get list of students associated with that course and thus assignment for marking
 			global $conn;
-			$sql = "SELECT student.student_id,roll_no,name,marks FROM student,marks where assignment_id=? and
-					student.student_id=marks.student_id";
+			$sql = "SELECT student.student_id,roll_no,name,marks,filepath FROM student,marks,submits where marks.assignment_id=? and
+					student.student_id=marks.student_id  AND student.student_id=submits.student_id AND marks.assignment_id=submits.assignment_id";
 			$stmt= $conn->prepare($sql);
 			$stmt->bindParam(1, $assignment_id);
 			$stmt->execute();
@@ -100,9 +106,15 @@ class Teacher
 		
 	}
 	
-	public function view_marks_all_students($course_id){
+	public function view_marks_all_students($course_code){
 		//view marks of all the students subscribed to that course
 		global $conn;
+			$sql = '(SELECT course_id FROM courses WHERE course_code = ?)';
+			$stmt= $conn->prepare($sql);
+			$stmt->bindParam(1, $course_code);
+			$stmt->execute();
+			$result=$stmt->fetchAll();
+			$course_id = $result[0][0];
 			$sql = "SELECT student_id FROM enrolls where course_id=?";
 			$stmt= $conn->prepare($sql);
 			$stmt->bindParam(1, $course_id);
@@ -117,8 +129,14 @@ class Teacher
 			return $complete_array;
 	}
 	
-	public function get_no_of_assignments_view($course_id){
+	public function get_no_of_assignments_view($course_code){
 		global $conn;
+		$sql = '(SELECT course_id FROM courses WHERE course_code = ?)';
+		$stmt= $conn->prepare($sql);
+		$stmt->bindParam(1, $course_code);
+		$stmt->execute();
+		$result=$stmt->fetchAll();
+		$course_id = $result[0][0];
 			$sql = "SELECT count(assignment_id) FROM assignment where course_id=?";
 			$stmt= $conn->prepare($sql);
 			$stmt->bindParam(1, $course_id);

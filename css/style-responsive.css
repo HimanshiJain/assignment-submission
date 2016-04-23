@@ -14,6 +14,13 @@
 		margin: 0px 0px;
 		margin-left: 14.422% !important;
 	}
+
+	#content2 {
+		width: 85.578%;
+		padding: 20px;
+		margin: 0px;
+		margin-left: 0px;
+	}
 		
 	#sidebar-left {
 		background: #1C2B36;
@@ -49,6 +56,14 @@
 		margin: 0px;
 		margin-left: 14.422% !important;
 	}
+
+	#content2 {
+		width: 85.578%;
+		padding: 20px;
+		margin: 0px;
+		margin-left: 0px;
+	}
+	
 	
 	.dark {
 		padding: 20px;
@@ -150,6 +165,13 @@
 		margin-left: 8.334% !important;
 	}
 	
+	#content2 {
+		width: 85.578%;
+		padding: 20px;
+		margin: 0px;
+		margin-left: 0px;
+	}
+
 	.dark {
 		padding: 20px;
 		top: -22px;

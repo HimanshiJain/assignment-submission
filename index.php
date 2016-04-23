@@ -58,7 +58,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2>Students</h2>
+          <h2 class="text-center">Students</h2>
           <p>
           <ul>
             <li>View assignments of courses enrolled</li>
@@ -69,7 +69,7 @@
 
         </div>
         <div class="col-md-4">
-          <h2>Teachers</h2>
+          <h2 class="text-center">Teachers</h2>
           <p>
           <ul>
             <li>Add/Delete courses</li>
@@ -79,11 +79,12 @@
           </p>
        </div>
         <div class="col-md-4">
-          <h2>Admins</h2>
+          <h2 class="text-center">Admins</h2>
           <p>
           <ul>
-            <li>Add Students</li>
-            <li>Add Teachers</li>
+            <li>Admin portal for admin</li>
+            <li>Add Students into system</li>
+            <li>Add Teachers into system</li>
             <li>Modify courses</li>
           </ul>
           </p>

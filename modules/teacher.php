@@ -31,17 +31,14 @@ class Teacher
 		$stmt->bindParam(1, $course_id);
 		$stmt->execute();
 		$result=$stmt->fetchAll();
-		//print_r($result);
-		//echo $result[2]['student_id'];
-		
+		//INITIALIZE MARKS TO ZERO		
 		foreach($result as $key){
 			$sql = "INSERT INTO marks(assignment_id,student_id) VALUES(?,?)";
 			$stmt= $conn->prepare($sql);
 			$stmt->bindParam(1, $assignment_id);
 			$stmt->bindParam(2, $key['student_id']);
 			$stmt->execute();
-		}
-		
+		}		
 	}
 	
 	public function get_assignments_course($course_code,$teacher_id){

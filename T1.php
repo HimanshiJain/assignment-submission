@@ -73,7 +73,7 @@
 						  	<div class="form-group">
 							    <label class="col-sm-2 control-label" for="course-code">For Course</label>
 							    <div class="controls">
-							    <input class="form-control" name="coursecode" id="course" type="text" placeholder="<?php echo $_SESSION['course_code']; ?>" disabled>
+							    <input class="form-control" name="coursecode" id="course-code" type="text" value ="<?php echo $_SESSION['course_code'];?>" readonly>
 							    </div>
 							</div>
 							<div class="control-group">

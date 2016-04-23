@@ -22,7 +22,7 @@ class Email
 		$this->mail->FromName = "Assignment Admin";
 		$this->mail->WordWrap = 400;
 		$this->mail->IsHTML(true); // set email format to HTML
-		$this->mail->AddReplyTo($MAILER_FROM, "ContactAssignment");
+		$this->mail->AddReplyTo($MAILER_FROM, "Assignment Admin");
 	}
 	public function send_password_email($email,$password)
 	{
@@ -39,6 +39,34 @@ class Email
 			return -1;
 		}
 		return 1;
+	}
+	public function send_notification_all($course_id,$course_code,$description,$due_date)
+	{
+		$mail_msg = "An assignment for course ".$course_code." is uploaded by the teacher, due on ".$due_date.".";
+		$mail_msg .= "Description : ".$description;
+		$this->mail->Subject = "Assignment - ".$course_code." due on ".$due_date;
+		$this->mail->Body    = $mail_msg;
+
+		global $conn;
+		$sql = "SELECT email,name FROM user JOIN student ON user.user_id = student.user_id JOIN enrolls ON student.student_id = enrolls.student_id WHERE enrolls.course_id = ?";
+		$stmt= $conn->prepare($sql);
+		$stmt->bindParam(1, $course_id);
+		$stmt->execute();
+		$enrolled_students = $stmt->fetchAll();
+		//INITIALIZE MARKS TO ZERO
+		foreach($enrolled_students as $student)
+		{
+			$this->mail->AddAddress($student['email'],$student['name']);				
+		}
+		try
+		{
+			$flag = $this->mail->Send();
+		}
+		catch(Exception $e)
+		{
+			return -1;
+		}
+		return $flag;
 	}
 }
 

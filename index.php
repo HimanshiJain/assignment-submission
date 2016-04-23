@@ -8,80 +8,131 @@
     //1000th prime no - 7919
 ?>
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="fav1.ico">
+
     <title>Login| Assignment Submission System</title>
-    <link href="css/normalize.css" rel="stylesheet">
-    <link href=
-    'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
-    rel='stylesheet prefetch'>
-    <link crossorigin="anonymous" href=
-    "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-    integrity=
-    "sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-    rel="stylesheet">
-</head>
-
-<body>
-    <script crossorigin="anonymous" integrity=
-    "sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
-    </script>
-
-    <div class="container">
-        <div style="margin-top: 10%">
-            <?php
-                if(isset($_GET["error"]))
-                {
-                    echo "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\" id=\"error-box\">".$_GET["error"]."</div>";
-                }
-            ?>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap2.min.css" rel="stylesheet">
+    <style>
+    /* Move down content because we have a fixed navbar that is 50px tall */
+      body {
+        padding-top: 50px;
+        padding-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          
+          <a class="navbar-brand" href="#"><strong>Assignment Submission System</strong></a>
         </div>
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 form-box">
-                <div class="form-top">
-                    <div>
-                        <h3>Login to Assignment Submission System</h3>
-                        <p>Enter your email and password to log in</p>
-                    </div>
-                </div>
-                <div class="form-bottom">
-                    <form action="logincheck.php" class="login-form" method="post" role=
-                    "form">
-                    <input type="hidden" name="formid" value="<?php echo $_SESSION['formid']; ?>"/>
-                        <div class="form-group">
-                            <label class="sr-only" for=
-                            "form-username">Email</label>
-                            <div class="input-group">
-                                <input class="form-username form-control" id=
-                                "form-username" name="email"
-                                placeholder="Email Here" type="text">
-                                <span class="input-group-addon"><i class=
-                                "glyphicon glyphicon-envelope"></i></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only" for=
-                            "form-password">Password</label>
-                            <div class="input-group">
-                            <input class=
-                            "form-password form-control" id="form-password"
-                            name="password" placeholder="Password Here"
-                            type="password">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            </div>
-                        </div>
-                        <input type="submit" class="btn btn-primary" value="Login">
-                    </form>
-                </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form action="logincheck.php" method="post" class="navbar-form navbar-right">
+            <input type="hidden" name="formid" value="<?php echo $_SESSION['formid']; ?>"/>
+            <div class="form-group">
+              <input class="form-username form-control" id="form-username" name="email" placeholder="Email" type="text">
             </div>
-        </div>
+            <div class="form-group">
+              <input class="form-password form-control" id="form-password" name="password" placeholder="Password" type="password">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <img src="images/index3.jpg" style="width:100%;">
+    <div class="jumbotron">
+      <div class="container text-center">
+        <h1>Welcome to Assignment Submission System</h1>
+      </div>
     </div>
-    <script src=
-    'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'>
-    </script> 
-    <script src="js/index.js">
-    </script>
-</body>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Students</h2>
+          <p>
+          <ul>
+            <li>View assignments of courses enrolled</li>
+            <li>Get notified by Mail Notification</li>
+            <li>Submit the assignment online</li>
+          </ul>
+          </p>
+
+        </div>
+        <div class="col-md-4">
+          <h2>Teachers</h2>
+          <p>
+          <ul>
+            <li>Add/Delete courses</li>
+            <li>Upload Assignment for Students</li>
+            <li>Evaluate assignments and mark them</li>
+          </ul>
+          </p>
+       </div>
+        <div class="col-md-4">
+          <h2>Admins</h2>
+          <p>
+          <ul>
+            <li>Add Students</li>
+            <li>Add Teachers</li>
+            <li>Modify courses</li>
+          </ul>
+          </p>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Divyangana Gopalka | Feroz Ahmad | Himanshi Jain</p>
+      </footer>
+    </div> <!-- /container -->
+    <?php
+      if(isset($_GET["error"]))
+      { ?>
+        <div class="modal fade" tabindex="-1" id="modalMsgBox" role="dialog">
+          <div class="modal-dialog">    
+          <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Hey there!</h4>
+              </div>
+              <div class="modal-body">
+                <div class="alert alert-danger alert-dismissible" role="alert" id="error-box"><?php echo $_GET["error"];?></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    <?php } ?>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.9.1.min.js"></script>    
+    <script src="js/bootstrap.min.js"></script>
+    <?php
+      if(isset($_GET["error"]))
+      { ?>
+          <script type="text/javascript">
+            $(window).load(function(){
+              $('#modalMsgBox').modal('show');
+            });
+          </script>
+        <?php
+      }
+    ?>    
+  </body>
 </html>

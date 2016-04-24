@@ -1,8 +1,8 @@
 <?php
 	session_start();
-	require("../modules/functions.php");
-	require("../modules/connection.php");
-    require("../modules/admin_class.php");
+	require_once("../modules/functions.php");
+	require_once("../modules/connection.php");
+    require_once("../modules/admin_class.php");
     security_redirect_admin();
 	//GENERATING COUSRE LIST FOR ADD STUDENT
     
